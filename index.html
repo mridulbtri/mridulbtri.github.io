@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg:       #F7F5F0;
       --surface:  #EDEAE3;
@@ -18,7 +17,6 @@
       --accent-lt:#E8B97A;
       --white:    #FFFFFF;
     }
-
     html, body {
       height: 100%;
       background: var(--bg);
@@ -26,8 +24,6 @@
       font-family: 'DM Sans', sans-serif;
       overflow: hidden;
     }
-
-    /* ── Canvas backdrop ── */
     canvas {
       position: fixed;
       inset: 0;
@@ -36,8 +32,6 @@
       opacity: 0.18;
       pointer-events: none;
     }
-
-    /* ── Layout ── */
     .shell {
       position: relative;
       z-index: 10;
@@ -49,8 +43,6 @@
       padding: 2rem;
       text-align: center;
     }
-
-    /* ── Eyebrow ── */
     .eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
@@ -61,8 +53,6 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.2s forwards;
     }
-
-    /* ── Name ── */
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.6rem, 7vw, 5.2rem);
@@ -74,8 +64,6 @@
       opacity: 0;
       animation: fadeUp 0.9s ease 0.35s forwards;
     }
-
-    /* ── Divider ── */
     .rule {
       width: 3rem;
       height: 2px;
@@ -85,8 +73,6 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.5s forwards;
     }
-
-    /* ── Affiliation ── */
     .affiliation {
       font-size: 1rem;
       font-weight: 300;
@@ -96,13 +82,51 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.65s forwards;
     }
-
-    /* ── Under Construction badge ── */
+    .research {
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.75s forwards;
+      max-width: 34rem;
+    }
+    .research-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .tag {
+      padding: 0.32rem 0.85rem;
+      background: var(--white);
+      border: 1px solid #DDD8CF;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .tag.highlight {
+      background: var(--surface);
+      font-weight: 500;
+      color: var(--ink);
+    }
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      margin-top: 2.8rem;
+      margin-top: 2.4rem;
       padding: 0.55rem 1.2rem;
       background: var(--surface);
       border: 1px solid #D8D3C8;
@@ -113,9 +137,8 @@
       text-transform: uppercase;
       color: var(--ink-soft);
       opacity: 0;
-      animation: fadeUp 0.8s ease 0.8s forwards;
+      animation: fadeUp 0.8s ease 0.9s forwards;
     }
-
     .badge-dot {
       width: 7px;
       height: 7px;
@@ -123,26 +146,20 @@
       background: var(--accent);
       animation: pulse 2s ease-in-out infinite;
     }
-
-    /* ── Contact hint ── */
     .contact {
-      margin-top: 3rem;
+      margin-top: 2.4rem;
       font-size: 0.82rem;
       color: var(--ink-soft);
       opacity: 0;
-      animation: fadeUp 0.8s ease 1s forwards;
+      animation: fadeUp 0.8s ease 1.05s forwards;
     }
-
     .contact a {
       color: var(--accent);
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.2s;
     }
-
     .contact a:hover { border-color: var(--accent); }
-
-    /* ── Footer ── */
     footer {
       position: fixed;
       bottom: 1.5rem;
@@ -155,18 +172,14 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 1.2s forwards;
     }
-
-    /* ── Animations ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
       50%       { transform: scale(1.4); opacity: 0.6; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       canvas { display: none; }
       * { animation-duration: 0.01ms !important; }
@@ -174,49 +187,48 @@
   </style>
 </head>
 <body>
-
 <canvas id="c"></canvas>
-
 <div class="shell">
   <div class="eyebrow">PhD Researcher &nbsp;·&nbsp; Iowa State University</div>
-
   <h1>Mridul<br>Bhattarai</h1>
-
   <div class="rule"></div>
+  <p class="affiliation">Department of Mechanical Engineering</p>
 
-  <p class="affiliation">
-    Department of Mechanical Engineering<br>
-  </p>
+  <div class="research">
+    <div class="research-label">Research Interests</div>
+    <div class="tags">
+      <span class="tag highlight">Finite Element Methods</span>
+      <span class="tag highlight">Machine Learning &amp; AI</span>
+      <span class="tag highlight">Physics-Informed Neural Networks</span>
+      <span class="tag">Thin Shell Mechanics</span>
+      <span class="tag">Isogeometric Analysis</span>
+      <span class="tag">Stabilized FEM</span>
+      <span class="tag">Computational Mechanics</span>
+    </div>
+  </div>
 
   <div class="badge">
     <span class="badge-dot"></span>
     Site under construction
   </div>
-
   <p class="contact">
     In the meantime, reach me at
     <a href="mailto:mridul@iastate.edu">mridul@iastate.edu</a>
   </p>
 </div>
-
 <footer>mridulbtri.github.io &nbsp;·&nbsp; © 2026</footer>
-
 <script>
-  // Particle mesh — nodes connected by proximity, drifting slowly
   const canvas = document.getElementById('c');
   const ctx    = canvas.getContext('2d');
-
   const N = 55;
   const CONNECT_DIST = 140;
   const particles = [];
-
   function resize() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize);
-
   for (let i = 0; i < N; i++) {
     particles.push({
       x:  Math.random() * window.innerWidth,
@@ -225,19 +237,13 @@
       vy: (Math.random() - 0.5) * 0.4,
     });
   }
-
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Move
     for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
+      p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
       if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
     }
-
-    // Edges
     for (let i = 0; i < N; i++) {
       for (let j = i + 1; j < N; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -253,15 +259,12 @@
         }
       }
     }
-
-    // Nodes
     for (const p of particles) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
       ctx.fillStyle = '#C07D3A';
       ctx.fill();
     }
-
     requestAnimationFrame(draw);
   }
   draw();
